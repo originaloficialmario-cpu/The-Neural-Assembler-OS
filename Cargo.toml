@@ -4,4 +4,4 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-# Hier werden später unsere mathematischen Kernel verlinkt
+# Hier werden später unsere mathematischen Kernel verlinkt 
