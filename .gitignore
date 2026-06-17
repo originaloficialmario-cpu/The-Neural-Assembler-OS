@@ -1,6 +1,7 @@
 /target
-*.o
-*.bin
 *.iso
+*.bin
+*.o
 isofiles
-.cargo/
+.vscode/
+.DS_Store
