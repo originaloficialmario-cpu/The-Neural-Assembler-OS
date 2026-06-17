@@ -2,46 +2,29 @@
 #![no_std]
 #![no_main]
 
+mod mmu;
+mod neural_core;
+
 use core::panic::PanicInfo;
+use mmu::NeuralMmu;
+use neural_core::JitCompiler;
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    // Phase 1: Initialize Minimal Hardware
-    hardware_init();
+    // Phase 1: Initialize Minimal Hardware & Memory Management
+    let mut memory_unit = NeuralMmu::init();
 
-    // Phase 2: Wait for Neural Intent
-    let intent = wait_for_neural_intent();
+    // Phase 2: Wait for Neural Intent (Simulated incoming from Lean 4 Bridge)
+    // Here we simulate receiving the raw opcodes from our Python bridge
+    let neural_intent_opcodes: &[u8] = &[0x90, 0x90, 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3]; 
 
-    // Phase 3: Synthesize and Execute (The Neural Assembler core)
-    let machine_code = synthesize_assembly(intent);
-    execute_raw(machine_code);
-
-    loop {}
-}
-
-fn hardware_init() {
-    // Low-level port I/O to clear VRAM and stabilize CPU cores
-}
-
-fn wait_for_neural_intent() -> u32 {
-    // Placeholder: Interface for the locally loaded LLM
-    0x01 // Example: "Compute"
-}
-
-fn synthesize_assembly(intent: u32) -> &'static [u8] {
-    // Hier geschieht die Magie: Die KI generiert den Maschinencode
-    match intent {
-        0x01 => &[0x90, 0x90, 0xC3], // NOP, NOP, RET (Beispiel-Assembler)
-        _ => &[0xF4],               // HLT (Halt)
-    }
-}
-
-fn execute_raw(code: &[u8]) {
-    // Sprung in den generierten Code-Bereich im VRAM
+    // Phase 3: Synthesize and Execute directly on metal
     unsafe {
-        let func: extern "C" fn() = core::mem::transmute(code.as_ptr());
-        func();
+        JitCompiler::synthesize_and_execute(neural_intent_opcodes, &mut memory_unit);
     }
+
+    // Kernel loop
+    loop {}
 }
 
 #[panic_handler]
