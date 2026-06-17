@@ -1,5 +1,3 @@
-#![no_std]
-
 /// The Neural Core: Bypassing standard compilers.
 /// Ingests the output from link_lean_to_asm.py and executes it directly.
 

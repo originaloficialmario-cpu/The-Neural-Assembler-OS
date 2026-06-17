@@ -1,6 +1,3 @@
-
-#![no_std]
-
 /// The Neural Memory Management Unit (N-MMU)
 /// Enforces the 64KB-Mindset by strictly partitioning VRAM for Just-In-Time execution.
 
