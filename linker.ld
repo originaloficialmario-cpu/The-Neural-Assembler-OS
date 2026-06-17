@@ -8,7 +8,6 @@ SECTIONS {
         *(.text)
     }
 
-    /* Texte strikt vom Code separieren */
     .rodata : ALIGN(4K) {
         *(.rodata*)
     }

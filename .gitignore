@@ -1,4 +1,6 @@
+/target
 *.o
 *.bin
 *.iso
-isofiles/
+isofiles
+.cargo/

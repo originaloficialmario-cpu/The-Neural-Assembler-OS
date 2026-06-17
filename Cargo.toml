@@ -1,7 +1,19 @@
 [package]
-name = "neural-assembler-os"
+name = "neural-os"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-# Hier werden später unsere mathematischen Kernel verlinkt 
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+
+# Hier definieren wir das Verhalten für unser Bare-Metal-Ziel
+[target.x86_64-unknown-none]
+rustflags = [
+    "-C", "link-arg=-nostartfiles",
+    "-C", "link-arg=-Tlinker.ld"
+]

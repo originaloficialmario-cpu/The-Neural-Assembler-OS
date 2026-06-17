@@ -8,7 +8,6 @@ echo "[2] Assemblieren..."
 nasm -f elf32 boot.asm -o boot.o
 
 echo "[3] Rust kompilieren (Bare-Metal Modus)..."
-# HIER IST DER FIX: Wir verbieten PIC und nutzen ein statisches Speichermodell
 rustc --target i686-unknown-linux-gnu -C panic=abort -C relocation-model=static -O --emit obj \
       --crate-type staticlib src/main.rs -o main.o
 
