@@ -6,30 +6,6 @@ Dieses Repository beinhaltet die Kernarchitektur des Axion Neural Assembler OS, 
 Das System ist radikal auf minimalistische und spezifische Hardware-Ressourcen ausgelegt. Die Kompilierung erfolgt für eine reine x86-Umgebung ohne existierenden OS-Überbau.  
 Parameter	Spezifikation
 Target	
-
-i686-unknown-none
-
-  
-Architektur	
-
-x86 (32-Bit Pointer/Integer-Breite)  
-Betriebssystem	
-
-none (Bare-Metal)  
-Linker	
-
-ld.lld
-
-  
-Panic-Strategie	
-
-abort
-
-  
-Deaktivierte Features	
-
--mmx, -sse
-
   
 2. Kern-Philosophie & Architektur
 
